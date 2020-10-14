@@ -9,5 +9,9 @@
 # Wskazówka: istotą tego zadania nie jest wysyłanie emaili, ale czytanie w pętli kolejnych wierszy z pliku. Najprościej to wykonać ustawiając dla polecenia pętli while skierowanie wejścia stdin z pliku, dzięki czemu w kolejnych przebiegach pętli czytanie z pliku/stdin będzie kontynuowane.
 
 
+localisation=$(pwd)/Zad2_pliki
 
-
+for mail in $(cat $localisation/adresy.txt)
+do
+    cat $localisation/tresc.txt | mutt -s "Okna PCV" $mail -a $my_file_path/spec*.pdf
+done
