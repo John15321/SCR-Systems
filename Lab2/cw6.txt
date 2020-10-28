@@ -1,0 +1,36 @@
+6. (2p.) Sprawdź możliwość zawieszania procesu sygnałem SIGSTOP i wznawiania sygnałem SIGCONT. Sprawdź, że sygnał SIGSTOP daje taki sam efekt jak naciśnięcie klawisza Ctrl+Z na terminalu. Sprawdź, że sygnał SIGCONT daje taki sam efekt jak wykonanie polecenia fg lub bg (którego bardziej?).
+
+Za pomoca polecenia kill mozna zawiesic dzialanie programu komenda:
+kill -19 *numer procesu*
+
+Proces zostaje zastopowany, jest to rownowazne Ctrl+Z
+
+Rowniez mozna go przywrocic do dzialania za pomoca SIGCONT. Np w taki sposob mozna zatrzymac interpreter pythona, a nastepnie znowu go przywrocic:
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ python
+Python 3.8.5 (default, Jul 28 2020, 12:59:40)
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+[1]+  Stopped                 python3
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ fg
+python3
+print("python console")
+print("python console")
+python console
+>>> exit()
+
+Mozna też użyć kill i sygnałów np na programie sleep:
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ sleep 30 &
+[2] 6774
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ kill -19 6774
+
+[2]+  Stopped                 sleep 30
+
+
+Wznawiamy go
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ kill -18 6774
+
+i dopiero sie wtedy konczy
