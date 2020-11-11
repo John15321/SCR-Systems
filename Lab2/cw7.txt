@@ -1,0 +1,32 @@
+7. (2p.) Sprawdź wartości priorytetów procesów i ich liczby nice, a następnie przećwicz obniżanie priorytetu pracującego w tle procesu (nice/renice). Czy potrafisz zademonstrować działanie obniżonego liczbą nice priorytetu?
+Podsumuj wynik w raporcie i podaj polecenie obniżania priorytetu procesu.
+
+
+
+
+
+
+
+
+Przykladowe procesy i ich wartosci nice i priorytety (wszystkie 20 i 0)
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    1 root      20   0     892    544    484 S   0.0   0.0   0:00.02 init
+   14 root      20   0     892     76     16 S   0.0   0.0   0:00.00 init
+   15 root      20   0     892     76     16 S   0.0   0.0   0:00.02 init
+   16 john      20   0    2612    536    468 S   0.0   0.0   0:00.00 sh
+   17 john      20   0    2612   1636   1524 S   0.0   0.0   0:00.00 sh
+   22 john      20   0    2612    540    468 S   0.0   0.0   0:00.00 sh
+   24 john      20   0 1006072 100668  31172 S   0.0   0.8   0:25.98 node
+
+
+
+liczbe nice mozna nadac procesowi kiedy go tworzymy (np uruchomiamy program zad.sh)
+nice -n 2 ./zad.sh
+
+albo jesli proces juz dziala mozna mu zmienic liczbe nice np:
+(do 2)
+renice -n 2 -p 3888
+
+Zmiana na od 20-1 wymaga root'a
+
+Liczba nice jest sugestia tego jak duzo zasobow komputer powinien poswiecic na dany proces

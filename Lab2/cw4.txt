@@ -1,0 +1,14 @@
+4. (2p.) Poleceniem mknod utwórz potok nazwany (FIFO). W co najmniej czterech okienkach wywołaj równoczesne pisanie do, i równoczesne czytanie z tego potoku przez wiele procesów (polecenie cat).
+Sprawdź (i podaj w raporcie) jak system rozdziela dane z pliku procesom o współdzielonym dostępie do tego potoku?
+
+Zabijając na przemian procesy piszące/czytające, zaobserwuj, kiedy proces cat czytający z potoku czeka na więcej danych, a kiedy kończy pracę. Analogicznie, kiedy proces piszący czeka w gotowości do dalszego pisania na potoku, a kiedy samoistnie kończy pracę. Podsumuj w raporcie.
+
+
+
+
+
+
+
+Przy otwartych 4 terminalach (2 do czytania i 2 do pisania). Terminale odczytuja informacje praktycznie losowo, nie da sie przewidzdiec ktory otrzyma infomacje.
+
+Terminale czytajace zamkna ssie jesli wszystkie terminale piszace zostana zamkniete, terminale piszace nie zamkna sie nawet jesli wszystkie terminale czyztajace zostanaa zamkmniete. Kiedy piszace nic nie robia, czytajace po prostu czekaja na informacje
