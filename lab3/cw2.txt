@@ -1,0 +1,99 @@
+2. (2p.) Dodaj w stworzonym \textbfprogramie przechwytywanie sygnału/ów, i wykorzystując sygnały: SIGALRM, SIGTERM, SIGUSR1, SIGUSR2 wypróbuj następujące reakcje na sygnał: (a) wyświetlenie komunikatu i zakończenie pracy programu, (b) wyświetlenie komunikatu i powrót do wykonywania programu, (c) wstrzymywanie odebrania sygnału (np. na 1000 iteracji w pętli), i następnie wznowienie odebrania sygnału, i (d) całkowite ignorowanie sygnału. W raporcie wklej instrukcje programu deklarujące poszczególne reakcje na sygnał, i podsumuj uzyskane wyniki.
+
+zrobilem do tego kolejno skrypty  w pythonie zad2_ a b c d .py
+
+
+Przyklady działania a):
+
+$ python ./zad2_a.py 
+PID: 1745
+Recived: 15, terminating the process
+
+w innym terminalu:
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1745
+
+
+
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_a.py 
+PID: 1745
+Recived: 15, terminating the process
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_a.py 
+PID: 1748
+Recived: 14
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_a.py 
+PID: 1769
+Recived: 10. terminating the process
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_a.py 
+PID: 1770
+Recived: 12. terminating the process
+
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGALRM 1748
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR1 1769
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR2 1770
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR2 1770
+
+Jak widzimy za kazdym signalem teraz zgodnie zz trescia zadania daje kominikat i wychodzi z programu
+
+
+b):
+
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGALRM 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR1 1815
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR2 1815
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_b.py 
+PID: 1815
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 14
+Recived: 10
+Recived: 12
+
+
+
+Teraz przy kazdym z tych sygnalow ignoruje go i wraca do pracy
+
+
+
+c):
+
+$ python ./zad2_c.py 
+PID: 1848
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+Recived: 15
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1848
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1848
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1848
+
+Teraz program za kazdym razem jak odstaje jakis sygnal robi 1000 loopów pętpli
+
+
+
+d):
+
+całkowicie ignoruje kazdy sygnal:
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGTERM 1912
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGALRM 1912
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR1 1912
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ kill -SIGUSR2 1912
+
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/lab3$ python ./zad2_d.py 
+PID: 1912

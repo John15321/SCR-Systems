@@ -1,0 +1,59 @@
+1. (2p.) Napisz \textbfprogram wykonujący jakąś trywialną operację (np. ++i;) w nieskończonej pętli. Skompiluj i uruchom program, a następnie programem top sprawdź, czy Twój program pokazuje się w czołówce programów wykorzystujących cykle obliczeniowe komputera. Przed przejściem do dalszych prac zabij program klawiszem Ctrl-C. Dodaj w pętli opóźnienie (sleep(1);, a najlepiej nanosleep(); z opóźnieniem np. 100 milisekund) i upewnij się, że po uruchomieniu tego programu nie pojawia się on już na szczycie listy top. Domyślna częstotliwość odświeżania programu top jest mała, spróbuj ją zmienić korzystając z dostępnej pomocy programu. Zapisz co należało dodać do wywołania programu.
+
+
+skrypt zad1.py przed dodanie funkcji sleep z modułu time (sama nieksonczona petla)
+
+top - 18:43:02 up 16 min,  0 users,  load average: 0.18, 0.11, 0.04
+Tasks:  17 total,   2 running,  15 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 25.0 us,  2.3 sy,  0.0 ni, 70.5 id,  0.0 wa,  0.0 hi,  2.3 si,  0.0 st
+MiB Mem :  12748.0 total,  11897.2 free,    392.2 used,    458.6 buff/cache
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  12109.3 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  855 john      20   0   15824   9124   5788 R 100.0   0.1   0:11.31 python3
+  856 john      20   0   10868   3668   3156 R  10.0   0.0   0:00.04 top
+    1 root      20   0     892    548    484 S   0.0   0.0   0:00.03 init
+   14 root      20   0     900     80     16 S   0.0   0.0   0:00.00 init
+   15 root      20   0     900     84     16 S   0.0   0.0   0:00.01 init
+   16 john      20   0    2612    600    532 S   0.0   0.0   0:00.00 sh
+   17 john      20   0    2612    536    468 S   0.0   0.0   0:00.00 sh
+   42 john      20   0    2612    604    536 S   0.0   0.0   0:00.00 sh
+   44 john      20   0  998464  80528  32364 S   0.0   0.6   0:19.08 node
+   60 john      20   0  853068  38964  28616 S   0.0   0.3   0:00.38 node
+  245 john      20   0 1659080 270460  34500 S   0.0   2.1   0:11.58 node
+  252 john      20   0   10140   5360   3540 S   0.0   0.0   0:00.11 bash
+  354 john      20   0    2616    604    536 S   0.0   0.0   0:00.00 sh
+  355 john      20   0 3263592  70016  43000 S   0.0   0.5   0:01.80 vsls-agent
+  568 root      20   0     892     80     16 S   0.0   0.0   0:00.00 init
+  569 root      20   0     892     80     16 S   0.0   0.0   0:00.01 init
+  570 john      20   0   10040   5212   3460 S   0.0   0.0   0:00.03 bash
+
+skrypt zad1.py po dodaniu funkcji sleep co 1 sekunde
+
+top - 18:43:35 up 16 min,  0 users,  load average: 0.26, 0.15, 0.05
+Tasks:  17 total,   1 running,  16 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  12748.0 total,  11893.3 free,    396.1 used,    458.7 buff/cache
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  12105.4 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    1 root      20   0     892    548    484 S   0.0   0.0   0:00.03 init
+   14 root      20   0     900     80     16 S   0.0   0.0   0:00.00 init
+   15 root      20   0     900     84     16 S   0.0   0.0   0:00.01 init
+   16 john      20   0    2612    600    532 S   0.0   0.0   0:00.00 sh
+   17 john      20   0    2612    536    468 S   0.0   0.0   0:00.00 sh
+   42 john      20   0    2612    604    536 S   0.0   0.0   0:00.00 sh
+   44 john      20   0  998464  80296  32364 S   0.0   0.6   0:19.15 node
+   60 john      20   0  853068  38964  28616 S   0.0   0.3   0:00.38 node
+  245 john      20   0 1659668 271624  34500 S   0.0   2.1   0:11.81 node
+  252 john      20   0   10140   5360   3540 S   0.0   0.0   0:00.11 bash
+  354 john      20   0    2616    604    536 S   0.0   0.0   0:00.00 sh
+  355 john      20   0 3263608  70024  43000 S   0.0   0.5   0:01.80 vsls-agent
+  568 root      20   0     892     80     16 S   0.0   0.0   0:00.00 init
+  569 root      20   0     892     80     16 S   0.0   0.0   0:00.03 init
+  570 john      20   0   10040   5212   3460 S   0.0   0.0   0:00.03 bash
+  866 john      20   0   15824   9104   5764 S   0.0   0.1   0:00.01 python3
+  870 john      20   0   10868   3728   3216 R   0.0   0.0   0:00.02 top
+
+Jak dodamy funkcję sleep program nie jest już na samej górze programów wykorzystujących CPU.
+Program top jest uruchomiony z argumentami -d 0.1 zeby odswiezac top do 0.1 sekundy.
