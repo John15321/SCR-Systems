@@ -1,0 +1,4 @@
+Wyjścia wątków wyświetlają się w losowej kolejności.
+Jest ona nadawna przez scheduler'a, przez to że nie jest możliwe
+wykonanie dużej liczby wątków jednocześnie ze względu na ograniczoną liczbę rdzeni
+oraz fakt, że system obsługuje w tym samym czasie wiele innych wątków.

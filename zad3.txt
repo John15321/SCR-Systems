@@ -1,0 +1,29 @@
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/kod1$ gcc ./bug3.c -pthread
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/kod1$ ./a.out 
+Creating thread 0
+Creating thread 1
+Creating thread 2
+Creating thread 3
+Creating thread 4
+Creating thread 5
+Creating thread 6
+Creating thread 7
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+Hello from thread 8
+
+
+
+Pojedynczy argument jest przekazywany jako zmienna, 
+natomiast wiele argmentów przekazywanych jest za pomoca struct'a.
+
+program bug3.c kompiluje się bez błędów jednak widać problem na jego wyjściu po wykonaniu.
+
+
+Program bug3.c jest przykładem błędnego przekazywnia danych, 
+program Zad3.c został poprawiony tak by działał poprawnie.
