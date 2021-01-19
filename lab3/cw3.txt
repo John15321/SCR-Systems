@@ -1,0 +1,165 @@
+3. (2p.) Zapoznaj się z narzędziami umożliwiającymi odczyt pseudosystemu plików proc (man proc). W systemie Solaris pliki w tym systemie mają specyficzny format, i do ich odczytu i dekodowania treści służy odpowiedni zestaw programów. W systemie Linux pliki w /proc maja formaty tekstowe i można je odczytywać (a w konkretnych przypadkach również zapisywać) zwykłymi narzędziami do operacji na plikach tekstowych, jak: cat, grep, itp. Do wykonania ćwiczenia wybierz dowolny, działający program w systemie lub uruchom własny program.
+
+
+/proc jest montowanym folderem na linuxie który zawiera informacje o procesach:
+root@DESKTOP-TPH31OD:/proc# ls -la
+total 4
+dr-xr-xr-x 104 root root               0 Nov 13 18:26 .
+drwxr-xr-x  19 root root            4096 Nov 13 18:26 ..
+dr-xr-xr-x   9 root root               0 Nov 13 18:26 1
+dr-xr-xr-x   9 root root               0 Nov 13 18:26 14
+dr-xr-xr-x   9 root root               0 Nov 13 18:26 15
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 16
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 17
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 245
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 252
+dr-xr-xr-x   9 john john               0 Nov 13 18:27 354
+dr-xr-xr-x   9 john john               0 Nov 13 18:27 355
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 42
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 44
+dr-xr-xr-x   9 root root               0 Nov 13 18:33 568
+dr-xr-xr-x   9 root root               0 Nov 13 18:33 569
+dr-xr-xr-x   9 john john               0 Nov 13 18:32 570
+dr-xr-xr-x   9 john john               0 Nov 13 18:26 60
+dr-xr-xr-x   9 john john               0 Nov 13 18:43 870
+dr-xr-xr-x   9 root root               0 Nov 13 18:48 936
+dr-xr-xr-x   9 root root               0 Nov 13 18:48 937
+dr-xr-xr-x   9 root root               0 Nov 13 18:48 938
+dr-xr-xr-x   9 root root               0 Nov 13 18:48 949
+dr-xr-xr-x   2 root root               0 Nov 13 18:26 acpi
+-r--r--r--   1 root root               0 Nov 13 18:45 buddyinfo
+dr-xr-xr-x   4 root root               0 Nov 13 18:45 bus
+-r--r--r--   1 root root               0 Nov 13 18:26 cgroups
+-r--r--r--   1 root root               0 Nov 13 18:26 cmdline
+-r--r--r--   1 root root           17947 Nov 13 18:45 config.gz
+-r--r--r--   1 root root               0 Nov 13 18:45 consoles
+-r--r--r--   1 root root               0 Nov 13 18:26 cpuinfo
+-r--r--r--   1 root root               0 Nov 13 18:45 crypto
+-r--r--r--   1 root root               0 Nov 13 18:45 devices
+-r--r--r--   1 root root               0 Nov 13 18:45 diskstats
+-r--r--r--   1 root root               0 Nov 13 18:45 dma
+dr-xr-xr-x   2 root root               0 Nov 13 18:45 driver
+-r--r--r--   1 root root               0 Nov 13 18:45 execdomains
+-r--r--r--   1 root root               0 Nov 13 18:26 filesystems
+dr-xr-xr-x  11 root root               0 Nov 13 18:45 fs
+-r--r--r--   1 root root               0 Nov 13 18:45 interrupts
+-r--r--r--   1 root root               0 Nov 13 18:45 iomem
+-r--r--r--   1 root root               0 Nov 13 18:45 ioports
+dr-xr-xr-x  18 root root               0 Nov 13 18:45 irq
+-r--r--r--   1 root root               0 Nov 13 18:45 kallsyms
+-r--------   1 root root 140737471586304 Nov 13 18:45 kcore
+-r--r--r--   1 root root               0 Nov 13 18:45 key-users
+-r--r--r--   1 root root               0 Nov 13 18:45 keys
+-r--------   1 root root               0 Nov 13 18:45 kmsg
+-r--------   1 root root               0 Nov 13 18:45 kpagecgroup
+-r--------   1 root root               0 Nov 13 18:45 kpagecount
+-r--------   1 root root               0 Nov 13 18:45 kpageflags
+-r--r--r--   1 root root               0 Nov 13 18:26 loadavg
+-r--r--r--   1 root root               0 Nov 13 18:45 locks
+-r--r--r--   1 root root               0 Nov 13 18:26 meminfo
+-r--r--r--   1 root root               0 Nov 13 18:45 misc
+-r--r--r--   1 root root               0 Nov 13 18:45 modules
+lrwxrwxrwx   1 root root              11 Nov 13 18:26 mounts -> self/mounts
+-rw-r--r--   1 root root               0 Nov 13 18:45 mtrr
+lrwxrwxrwx   1 root root               8 Nov 13 18:26 net -> self/net
+-r--------   1 root root               0 Nov 13 18:45 pagetypeinfo
+-r--r--r--   1 root root               0 Nov 13 18:45 partitions
+-r--r--r--   1 root root               0 Nov 13 18:45 sched_debug
+-r--r--r--   1 root root               0 Nov 13 18:45 schedstat
+lrwxrwxrwx   1 root root               0 Nov 13 18:26 self -> 949
+-r--r--r--   1 root root               0 Nov 13 18:45 softirqs
+-r--r--r--   1 root root               0 Nov 13 18:42 stat
+-r--r--r--   1 root root               0 Nov 13 18:45 swaps
+dr-xr-xr-x   1 root root               0 Nov 13 18:26 sys
+dr-xr-xr-x   2 root root               0 Nov 13 18:45 sysvipc
+lrwxrwxrwx   1 root root               0 Nov 13 18:26 thread-self -> 949/task/949
+-r--------   1 root root               0 Nov 13 18:45 timer_list
+dr-xr-xr-x   4 root root               0 Nov 13 18:26 tty
+-r--r--r--   1 root root               0 Nov 13 18:26 uptime
+-r--r--r--   1 root root               0 Nov 13 18:26 version
+-r--------   1 root root               0 Nov 13 18:45 vmallocinfo
+-r--r--r--   1 root root               0 Nov 13 18:45 vmstat
+-r--r--r--   1 root root               0 Nov 13 18:45 zoneinfo
+
+Widzimy foldery które reprezentują poszczególne procesy które miedzy innymi mozemy wyswietlic uzywajac top, ps albo htop.
+/proc jest specjalnym file systemem nazywajacym sie po prostu "/proc"
+
+Każdy folder to jakis PID np 1/ itp
+możemy również wyświetlic jego zawartosc:
+root@DESKTOP-TPH31OD:/proc/1# ls -la
+total 0
+dr-xr-xr-x   9 root root 0 Nov 13 18:26 .
+dr-xr-xr-x 103 root root 0 Nov 13 18:26 ..
+dr-xr-xr-x   2 root root 0 Nov 13 18:46 attr
+-r--------   1 root root 0 Nov 13 18:46 auxv
+-r--r--r--   1 root root 0 Nov 13 18:46 cgroup
+--w-------   1 root root 0 Nov 13 18:46 clear_refs
+-r--r--r--   1 root root 0 Nov 13 18:26 cmdline
+-rw-r--r--   1 root root 0 Nov 13 18:46 comm
+-rw-r--r--   1 root root 0 Nov 13 18:46 coredump_filter
+-r--r--r--   1 root root 0 Nov 13 18:46 cpuset
+lrwxrwxrwx   1 root root 0 Nov 13 18:46 cwd -> /
+-r--------   1 root root 0 Nov 13 18:26 environ
+lrwxrwxrwx   1 root root 0 Nov 13 18:46 exe -> /init
+dr-x------   2 root root 0 Nov 13 18:46 fd
+dr-x------   2 root root 0 Nov 13 18:46 fdinfo
+-rw-r--r--   1 root root 0 Nov 13 18:46 gid_map
+-r--------   1 root root 0 Nov 13 18:46 io
+-r--r--r--   1 root root 0 Nov 13 18:46 limits
+dr-x------   2 root root 0 Nov 13 18:46 map_files
+-r--r--r--   1 root root 0 Nov 13 18:46 maps
+-rw-------   1 root root 0 Nov 13 18:46 mem
+-r--r--r--   1 root root 0 Nov 13 18:46 mountinfo
+-r--r--r--   1 root root 0 Nov 13 18:26 mounts
+-r--------   1 root root 0 Nov 13 18:46 mountstats
+dr-xr-xr-x  12 root root 0 Nov 13 18:46 net
+dr-x--x--x   2 root root 0 Nov 13 18:26 ns
+-rw-r--r--   1 root root 0 Nov 13 18:46 oom_adj
+-r--r--r--   1 root root 0 Nov 13 18:46 oom_score
+-rw-r--r--   1 root root 0 Nov 13 18:46 oom_score_adj
+-r--------   1 root root 0 Nov 13 18:46 pagemap
+-r--------   1 root root 0 Nov 13 18:46 personality
+-rw-r--r--   1 root root 0 Nov 13 18:46 projid_map
+lrwxrwxrwx   1 root root 0 Nov 13 18:46 root -> /
+-rw-r--r--   1 root root 0 Nov 13 18:26 sched
+-r--r--r--   1 root root 0 Nov 13 18:46 schedstat
+-rw-r--r--   1 root root 0 Nov 13 18:46 setgroups
+-r--r--r--   1 root root 0 Nov 13 18:46 smaps
+-r--r--r--   1 root root 0 Nov 13 18:46 smaps_rollup
+-r--------   1 root root 0 Nov 13 18:46 stack
+-r--r--r--   1 root root 0 Nov 13 18:26 stat
+-r--r--r--   1 root root 0 Nov 13 18:42 statm
+-r--r--r--   1 root root 0 Nov 13 18:26 status
+-r--------   1 root root 0 Nov 13 18:46 syscall
+dr-xr-xr-x   4 root root 0 Nov 13 18:46 task
+-r--r--r--   1 root root 0 Nov 13 18:46 timers
+-rw-rw-rw-   1 root root 0 Nov 13 18:46 timerslack_ns
+-rw-r--r--   1 root root 0 Nov 13 18:46 uid_map
+-r--r--r--   1 root root 0 Nov 13 18:46 wchan
+
+
+
+cat'ując np exe dostajemy:
+(F�(\�(�h)�� ȕ)Hh) � d�(p�(ֈ(8�(8�(��(�h)p� x])0�) 
+                                                                                           %��(@
+                                                                                                %��)Ȏ(h�(z�(�'
+                                                                                                              �(�h)�� ��)Hh)ж �)&�((ԑ(�'`�(�h)� ��)��)ș(ʙ(Й(��(�(�(�(<�(R�(Hh)�� �h)`� ��)Hh)�� Hh)�i)`� ��)��)�h) � Ж)�h)� �)P�)�(�(d�(r�(��(��(��(��(��(��(�(v�(|�(��(��(��(��(��(��(��(ī(ҫ(�(�(��(
+�(�(�(l�(Ĭ(Hh)<� Ȭ(Ȭ(�(�(�(�(И)B�(�( �(Hh)�� �h)P� ��)�)B�(��(��(�h)�� ��)��(��(��(��(5�(��(��(��(��(��(5�(��(��(��(��(��((�(�(��(_�(u�(��(�($�(��( �)�(:�(��(��(��(@�)h�(��(��(�h)�� ��)�h)й ��)"�(6�(��(
+�(`�(��(Hh)� Hh)� М)�)8)d�(r�(��(��(��(��(��(\)v)v�(|�(��(��(��(��(��(��(��(ī(ҫ(�(�(��(x)�(�(l�(Ĭ(J)�h)� 0�)\)\)z)
+
+man daje nama podsatwowe infomracje na temat /proc:
+
+NAME
+       proc - process information pseudo-filesystem
+
+DESCRIPTION
+       The  proc  filesystem  is a pseudo-filesystem which provides an interface to kernel data structures.  It is commonly mounted at /proc.  Typically, it is mounted automatically by the system, but it
+       can also be mounted manually using a command such as:
+
+           mount -t proc proc /proc
+
+       Most of the files in the proc filesystem are read-only, but some files are writable, allowing kernel variables to be changed.
+
+   Mount options
+       The proc filesystem supports the following mount options:
+
