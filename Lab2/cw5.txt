@@ -1,0 +1,44 @@
+5. (2p.) Napisz skrypt, który w pętli będzie coś robił (np. co sekundę wypisywał bieżącą godzinę). Sprawdź wysyłanie do procesu różnych sygnałów poleceniem kill (SIGINT, SIGQUIT, ale także SIGFPE, SIGILL). Następnie rozbuduj skrypt o przechwytywanie tych sygnałów (trap) i sprawdź, że to działa, to znaczy, że tak napisanego procesu nie da się zabić tymi sygnałami. Sprawdź możliwość uśmiercenia sygnałem SIGKILL procesu, który przechwytuje wszystkie 15 podstawowych sygnałów.
+Uwaga: trap jest wbudowanym poleceniem shella, i jego wywołanie trochę się różni pod różnymi shellami. Najłatwiej jest wykonać to ćwiczenie przy użyciu Bourne shella (/bin/sh), ponieważ bash wykonuje różne potajemne zabiegi z obsługą sygnałów. Jednak polecenie trap w Bourne shellu jest prymitywne - czytaj man sh.
+
+
+skrypt zad5.sh
+
+np
+Przyklad ztrapowania SIGKILL:
+$ ./zad5.sh 
+pid is 3518
+^CTrapped SIGINT signal
+1
+^CTrapped SIGINT signal
+2
+^CTrapped SIGINT signal
+3
+^CTrapped SIGINT signal
+
+Mozna go zabic kill -SIGKILL 3518
+
+
+Inne przyklady:
+$ ./zad5.sh 
+pid is 3646
+1
+Trapped SIGQUIT signal
+2
+3
+Trapped SIGFPE signal
+4
+Trapped SIGILL signal
+5
+6
+^CTrapped SIGINT signal
+
+
+* w drugim terminalu *:
+john@...$ kill -SIGKILL 3518
+john@...$ kill -SIGQUIT 3646
+john@...$ kill -SIGFPE 3646
+john@...$ kill -SIGILL 3646
+
+
+Nie można ztrapować SIGKILL oraz SIGSTOP.

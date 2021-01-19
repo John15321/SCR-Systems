@@ -1,0 +1,38 @@
+2. (2p.) W jednym okienku terminala uruchom hierarchię co najmniej trzech procesów, tzn. procesy A, który uruchomi proces potomny B, który uruchomi proces potomny C. Mogą to być kolejno uruchamiane interpretery poleceń, albo uruchamiające się kolejno skrypty lub programy. W innym oknie terminala sprawdź programem ps zależności potomków i rodziców w utworzonej hierarchii.
+Poleceniem kill zabij proces w środku tej hierarchii (B). Sprawdź poleceniem ps co pozostało z pierwotnych procesów, i czy osierocony proces zostanie poprawnie adoptowany przez proces init.
+
+W sprawozdaniu z wykonania zadania opisz tylko otrzymany wynik, nie wklejaj napisanych skryptów.
+
+
+
+Po uruchomieniu trzykrotnie basha w terminalu otrzyumujemy takie drzewko:
+
+john@DESKTOP-TPH31OD:/mnt/c/Users/johnb$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     0     0 ?           -1 Sl       0   0:00 /init
+    1  4694  4694  4694 ?           -1 Ss       0   0:00 /init
+ 4694  4695  4694  4694 ?           -1 S        0   0:00  \_ /init
+ 4695  4696  4696  4696 pts/0     4910 Ss    1000   0:00      \_ -bash
+ 4696  4805  4805  4696 pts/0     4910 S     1000   0:00          \_ bash
+ 4805  4910  4910  4696 pts/0     4910 S+    1000   0:00              \_ bash
+    1  5020  5020  5020 ?           -1 Ss       0   0:00 /init
+ 5020  5021  5020  5020 ?           -1 S        0   0:00  \_ /init
+ 5021  5022  5022  5022 pts/1     5131 Ss    1000   0:00      \_ -bash
+ 5022  5131  5131  5022 pts/1     5131 R+    1000   0:00          \_ ps axjf
+john@DESKTOP-TPH31OD:/mnt/c/Users/johnb$ kill -9 4805
+john@DESKTOP-TPH31OD:/mnt/c/Users/johnb$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     0     0 ?           -1 Sl       0   0:00 /init
+    1  4694  4694  4694 ?           -1 Ss       0   0:00 /init
+ 4694  4695  4694  4694 ?           -1 S        0   0:00  \_ /init
+ 4695  4696  4696  4696 pts/0     4696 Ss+   1000   0:00      \_ -bash
+ 4695  4910  4910  4696 pts/0     4696 S     1000   0:00      \_ bash
+    1  5020  5020  5020 ?           -1 Ss       0   0:00 /init
+ 5020  5021  5020  5020 ?           -1 S        0   0:00  \_ /init
+ 5021  5022  5022  5022 pts/1     5132 Ss    1000   0:00      \_ -bash
+ 5022  5132  5132  5022 pts/1     5132 R+    1000   0:00          \_ ps axjf
+john@DESKTOP-TPH31OD:/mnt/c/Users/johnb$
+
+
+
+ Z procesów zostały procesy wyżej w chierarchii od procesu zabitego, a procesy nizej zostały przejete przez init

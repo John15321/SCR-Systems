@@ -1,0 +1,48 @@
+1. (2p.) Zapoznaj się z programem ps (man ps). Wypróbuj dwa formaty wyświetlania rozszerzonych informacji: -f i -l. Przeczytaj podręcznik polecenia ps aby zrozumieć wyświetlane parametry. Naucz się wybierać zestaw procesów do wyświetlania argumentami opcjonalnymi -u, -t, i -p.
+Ile Twoich procesów istniało w systemie w chwili przykładowego wywołania ps?
+
+Ile procesów sshd istniało w systemie (serwerze) w chwili wykonywania ćwiczenia (sprawdź polecenie pgrep)?
+
+
+
+
+-f     
+Do full-format listing.  This option can be combined with many other UNIX-style options to add additional columns.  It also causes the command arguments to be printed.  When used with -L,
+ the NLWP (number of threads) and LWP (thread ID) columns will be added.  See the c option, the format keyword args, and the format keyword comm.
+
+Przyklad:
+$ ps -f
+UID        PID  PPID  C STIME TTY          TIME CMD
+john       463   342  0 20:54 pts/1    00:00:00 /bin/bash
+john       980   463  0 21:33 pts/1    00:00:00 ps -f
+
+
+
+ -l     Long format.  The -y option is often useful with this.
+
+ Przyklad:
+ $ ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000   463   342  0  80   0 -  2502 do_wai pts/1    00:00:00 bash
+0 R  1000   985   463  0  80   0 -  2633 -      pts/1    00:00:00 ps
+
+ -u userlist
+Select by effective user ID (EUID) or name.  This selects the processes whose effective user name or ID is in userlist.
+The effective user ID describes the user whose file access permissions are used by the process (see geteuid(2)).  Identical to U and --user.
+
+-p
+ -p pidlist
+Select by PID.  This selects the processes whose process ID numbers appear in pidlist.  Identical to p and --pid.
+
+$ ps -p 463
+  PID TTY          TIME CMD
+  463 pts/1    00:00:00 bash
+
+
+-t ttylist
+Select by tty.  This selects the processes associated with the terminals given in ttylist.  Terminals (ttys, or screens for text output) can be specified in several forms: /dev/ttyS1,
+ttyS1, S1.  A plain "-" may be used to select processes not attached to any terminal.
+
+W chili przykładowego wywołania ps istniało 16 procesów
+
+0 procesow sshd działa na moim systemie

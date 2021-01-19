@@ -1,0 +1,30 @@
+3. (2p.) Uruchom potok co najmniej trzech poleceń działających przez jakiś zauważalny czas. Mogą to być odpowiednio dobrane polecenia systemowe, lub samodzielnie napisane skrypty. Sprawdź poleceniem ps i odpowiedz jakie zachodzi pokrewieństwo między tymi procesami (jeśli w ogóle zachodzi).
+Wskazówka: ponieważ potok służy do przesyłania danych od procesu do procesu, i synchronizuje pracę wszystkich procesów odpowiednio do pojawiających się danych, dobrą metodą generowania demonstracyjnego potoku jest umieszczenie na jego początku procesu, wysyłającego na swoje wyjście stały strumień danych, np. piszącego w pętli co sekundę jakiś krótki komunikat. Kolejne elementy potoku mogą być realizowane przez program cat.
+
+
+Program w pythonie który printuje od 0 do 10000000
+#!/bin/python3
+
+for i in range(0, 10000000):
+    print(i) 
+Nastepnie:
+
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ ./main.py | grep nic_nie_znajdzie | cat &
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ ps f
+  PID TTY      STAT   TIME COMMAND
+ 1587 pts/2    Ss     0:00 -bash
+ 3542 pts/2    R      0:01  \_ /bin/python3 ./main.py
+ 3543 pts/2    S      0:00  \_ grep --color=auto nic_nie_znajdzie
+ 3544 pts/2    S      0:00  \_ cat
+ 3545 pts/2    R+     0:00  \_ ps f
+
+john@DESKTOP-TPH31OD:/mnt/e/Uczelnia/Semestr5/SCR-Systems/Lab2$ ps -f
+UID        PID  PPID  C STIME TTY          TIME CMD
+john      5587  5282  0 20:17 pts/3    00:00:00 /bin/bash
+john      5795  5587 91 20:19 pts/3    00:00:02 /bin/python3 ./main.py
+john      5796  5587 14 20:19 pts/3    00:00:00 grep --color=auto qwertyu
+john      5797  5587  0 20:19 pts/3    00:00:00 cat
+john      5799  5587  0 20:19 pts/3    00:00:00 ps -f
+
+Polecenia są wszystkie dziecmi bash'a
